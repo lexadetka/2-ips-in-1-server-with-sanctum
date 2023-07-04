@@ -1,0 +1,93 @@
+version: '3'
+
+services:
+  nginx-back:
+    image: nginx:latest
+    volumes:
+      - ./backend:/var/www
+      - ./backend/_docker/nginx/conf.d:/etc/nginx/conf.d
+    expose:
+      - 80
+    depends_on:
+      - app
+    container_name: backend_nginx
+    networks:
+      net:
+        ipv4_address: 192.168.2.2
+
+  app:
+    build:
+      context: .
+      dockerfile: backend/_docker/app/Dockerfile
+    volumes:
+      - ./backend:/var/www
+    container_name: backend_app
+    expose:
+      - 9000
+    depends_on:
+      - db
+    networks:
+      net:
+        ipv4_address: 192.168.2.3
+
+  db:
+    image: mysql:8.0
+    restart: always
+    volumes:
+      - ./backend/tmp/db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: sanctum
+      MYSQL_ROOT_PASSWORD: vyazuti12345
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    container_name: db
+    networks:
+      net:
+        ipv4_address: 192.168.2.4
+
+
+
+  nginx-app:
+    image: nginx:latest
+    volumes:
+      - ./frontend:/var/www
+      - ./frontend/_docker/nginx/conf.d:/etc/nginx/conf.d
+    expose:
+      - 80
+    networks:
+      net:
+        ipv4_address: 192.168.2.5
+
+  nginx-admin:
+    image: nginx:latest
+    volumes:
+      - ./admin:/var/www
+      - ./admin/_docker/nginx/conf.d:/etc/nginx/conf.d
+    expose:
+      - 80
+    networks:
+      net:
+        ipv4_address: 192.168.2.7
+
+  nginx-proxy:
+    image: nginx:latest
+    volumes:
+      - ./nginx.proxy/conf.d:/etc/nginx/conf.d
+    networks:
+      net:
+        ipv4_address: 192.168.2.6
+    ports:
+      - 80:80
+
+networks:
+  net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.2.0/24
+
+
+
