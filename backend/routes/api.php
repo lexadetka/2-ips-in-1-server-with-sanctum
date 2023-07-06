@@ -24,3 +24,5 @@ Route::group(['middleware'=>'auth:sanctum'], function (){
 });
 
 Route::post('/post', \App\Http\Controllers\PostController::class);
+
+//Route::post('/registration', \App\Http\Controllers\RegisterController::class);/

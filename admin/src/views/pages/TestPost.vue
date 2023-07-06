@@ -26,6 +26,9 @@ export default {
   },
   mounted() {
     axios.get('http://localhost:8080/sanctum/csrf-cookie')
+        .then(res=>{
+          console.log(res)
+        })
   }
   ,
   methods: {

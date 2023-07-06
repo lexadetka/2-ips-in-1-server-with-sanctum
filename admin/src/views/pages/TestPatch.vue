@@ -1,5 +1,6 @@
 <script setup>
 axios.defaults.withCredentials=true
+
 </script>
 <template>
   <div class="w-25">
