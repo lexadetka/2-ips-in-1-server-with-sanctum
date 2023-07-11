@@ -30,7 +30,7 @@ export default {
     }
   },
   mounted() {
-    axios.get('http://localhost:8080/sanctum/csrf-cookie')
+    axios.get('https://api.alexeybychkovski.site/sanctum/csrf-cookie')
         .then(r=>{
           console.log(r)
         })
@@ -38,7 +38,7 @@ export default {
   methods:{
     registration(){
       this.errors = null
-      axios.post('http://localhost:8080/register',
+      axios.post('https://api.alexeybychkovski.site/register',
           {email: this.email, name: this.name, password: this.password, password_confirmation: this.password_confirmation})
           .then(res=>{
             console.log(res)

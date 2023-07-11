@@ -5,15 +5,15 @@ import axios from "axios";
 import router from "./router";
 
 axios.defaults.withCredentials = true
-axios.interceptors.response.use({}, err => {
-  if (err.response.status === 401 || err.response.status === 419) {
-    const token = localStorage.getItem('x_xsrf_token')
-    if (token) {
-      localStorage.removeItem('x_xsrf_token')
-    }
-    router.push({name: 'login'})
-  }
-})
+// axios.interceptors.response.use({}, err => {
+//   if (err && (err.response['status'] === 401 || err.response['status']=== 419)) {
+//     const token = localStorage.getItem('x_xsrf_token')
+//     if (token) {
+//       localStorage.removeItem('x_xsrf_token')
+//     }
+//     router.push({name: 'login'})
+//   }
+// })
 </script>
 
 <template>

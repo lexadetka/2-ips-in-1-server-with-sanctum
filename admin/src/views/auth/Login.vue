@@ -37,9 +37,9 @@ export default {
         this.token = localStorage.getItem('x_csrf_token')
       },
       async login() {
-      axios.get('http://localhost:8080/sanctum/csrf-cookie')
+      axios.get('https://api.alexeybychkovski.site/sanctum/csrf-cookie')
           .then(res => {
-            axios.post('http://localhost:8080/login', {email: this.email, password: this.password})
+            axios.post('https://api.alexeybychkovski.site/login', {email: this.email, password: this.password})
                 .then(r => {
                   localStorage.setItem('x_xsrf_token', r.config.headers['X-XSRF-TOKEN'])
 
@@ -51,7 +51,7 @@ export default {
           })
     },
     getUser() {
-      axios.get('http://localhost:8080/api/user')
+      axios.get('https://api.alexeybychkovski.site/api/user')
           .then(res => {
             console.log(res)
             this.user = res.data

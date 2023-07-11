@@ -35,7 +35,7 @@ export default {
       this.token = localStorage.getItem('x_xsrf_token')
     },
     logout(){
-      axios.post('http://localhost:8080/logout').then(res=>{
+      axios.post('https://api.alexeybychkovski.site/logout').then(res=>{
         localStorage.removeItem('x_xsrf_token')
         window.location.reload();
         router.push({name: 'login'})
