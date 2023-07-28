@@ -25,12 +25,12 @@ export default {
     }
   },
   mounted() {
-    axios.get('http://localhost:8080/sanctum/csrf-cookie')
+    axios.get('https://api.alexeybychkovski.site/sanctum/csrf-cookie')
   }
   ,
   methods: {
     testPost(){
-      axios.post('http://localhost:8080/api/post', {data1: this.data1, data2: this.data2})
+      axios.post('https://api.alexeybychkovski.site/api/post', {data1: this.data1, data2: this.data2})
           .then(res=>{
             this.postData = res.data
           })

@@ -41,8 +41,8 @@ export default {
           .then(res => {
             axios.post('https://api.alexeybychkovski.site/login', {email: this.email, password: this.password})
                 .then(r => {
-                  localStorage.setItem('x_xsrf_token', r.config.headers['X-XSRF-TOKEN'])
 
+                  localStorage.setItem('x_xsrf_token', r.config.headers['X-XSRF-TOKEN'])
                   window.location.reload();
                   router.push({name:'testPatch'})
                 }).catch(err=>{
